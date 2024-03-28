@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyMapper", "EasyMapper\EasyMapper.csproj", "{AF1F95B2-6ED7-400F-BB80-4362AA7884FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{7C058F8E-C3D1-402B-B859-08853E0B478F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{907A9B51-50AD-41EF-98DA-2EA056253B4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907A9B51-50AD-41EF-98DA-2EA056253B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907A9B51-50AD-41EF-98DA-2EA056253B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907A9B51-50AD-41EF-98DA-2EA056253B4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1F95B2-6ED7-400F-BB80-4362AA7884FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1F95B2-6ED7-400F-BB80-4362AA7884FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1F95B2-6ED7-400F-BB80-4362AA7884FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1F95B2-6ED7-400F-BB80-4362AA7884FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C058F8E-C3D1-402B-B859-08853E0B478F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C058F8E-C3D1-402B-B859-08853E0B478F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C058F8E-C3D1-402B-B859-08853E0B478F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C058F8E-C3D1-402B-B859-08853E0B478F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
