@@ -8,14 +8,14 @@ class Object1
 
 class Object2
 {
-    public string? Name { get; set; }
-    public override string ToString() => Name ?? string.Empty;
+    public string? Nombre { get; set; }
+    public override string ToString() => Nombre ?? string.Empty;
 }
 
 class Object3
 {
-    public string? CompleteName { get; set; }
-    public override string ToString() => CompleteName ?? string.Empty;
+    public string? Name { get; set; }
+    public override string ToString() => Name ?? string.Empty;
 }
 
 class Program
