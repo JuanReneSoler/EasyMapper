@@ -45,7 +45,7 @@ class Program
         config.SetMapperProfile(x =>
         {
             x.CreateMap<Object1, Object2>();
-            x.CreateMap<Object1, Object3>();
+            x.CreateMap<Object1, Object3>().FromMember(x=>x.Name, x=>x.Nombre);
         });
 
         var program = new Program(config.CreateMapper());

@@ -2,6 +2,6 @@ namespace EasyMapper;
 
 public interface IMapperProfile
 {
-    void CreateMap<TOrigen, TDestino>();
+    IMap<TOrigen, TDestino> CreateMap<TOrigen, TDestino>();
     internal TDestino MapObject<TOrigen, TDestino>(TOrigen origen);
 }
