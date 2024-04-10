@@ -5,5 +5,5 @@ namespace EasyMapper;
 public interface IMap<TOrigen, TDestino>
 {
     internal TDestino CreateInstance(TOrigen origen);
-    IMap<TOrigen, TDestino> FromMember(Expression<Func<TDestino, object>> propertyDestiny, Expression<Func<TOrigen, object>> valuePropertyOrigin);
+    IMap<TOrigen, TDestino> FromMember<TProp>(Expression<Func<TDestino, TProp>> propertyDestiny, Func<TOrigen, TProp> evaluateFunc);
 }

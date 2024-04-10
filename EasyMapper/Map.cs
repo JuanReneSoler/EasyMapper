@@ -4,16 +4,25 @@ namespace EasyMapper;
 
 internal class Map<TOrigen, TDestino> : IMap<TOrigen, TDestino>
 {
-    private readonly IDictionary<string, string> _maps;
+    private readonly IDictionary<string, Func<TOrigen, object>> _maps;
 
     private Map()
     {
-        _maps = new Dictionary<string, string>();
-        Parallel.ForEach(typeof(TDestino).GetProperties(), p =>
+        _maps = new Dictionary<string, Func<TOrigen, object>>();
+        Parallel.ForEach(typeof(TOrigen).GetProperties(), p =>
         {
-            if (typeof(TOrigen).GetProperty(p.Name) is not null)
+            var oP = typeof(TDestino).GetProperty(p.Name);
+
+            if (p.PropertyType == oP?.PropertyType)
             {
-                _maps.Add(p.Name, p.Name);
+                _maps.Add(p.Name, (obj) =>
+                {
+                    var result = p.GetValue(obj);
+
+                    if(result is null) throw new Exception($"No se pudo obtener el valor de la propiedad: {p.Name}.");
+
+                    return result;
+                });
             }
         });
     }
@@ -23,11 +32,20 @@ internal class Map<TOrigen, TDestino> : IMap<TOrigen, TDestino>
         return new Map<TOrigen, TDestino>();
     }
 
-    public IMap<TOrigen, TDestino> FromMember(Expression<Func<TDestino, object>> propertyDestiny, Expression<Func<TOrigen, object>> valuePropertyOrigin)
+    public IMap<TOrigen, TDestino> FromMember<TProp>(
+            Expression<Func<TDestino, TProp>> propertyDestiny,
+            Func<TOrigen, TProp> evaluateFunc)
     {
-        var propertyOriginName = ((MemberExpression)valuePropertyOrigin.Body).Member.Name;
         var propertyDestinyName = ((MemberExpression)propertyDestiny.Body).Member.Name;
-        _maps.Add(propertyDestinyName, propertyOriginName);
+
+        _maps.Add(propertyDestinyName, (obj) =>
+        {
+            var result = evaluateFunc(obj);
+
+            if (result is null) throw new Exception($"No se pudo efectuar la operacion {evaluateFunc.GetType()}.");
+
+            return result;
+        });
         return this;
     }
 
@@ -37,7 +55,7 @@ internal class Map<TOrigen, TDestino> : IMap<TOrigen, TDestino>
 
         Parallel.ForEach(_maps.Keys, k =>
         {
-            var val = typeof(TOrigen).GetProperty(_maps[k])?.GetValue(origen);
+            var val = _maps[k](origen);
             typeof(TDestino).GetProperty(k)?.SetValue(destiny, val);
         });
 
