@@ -4,11 +4,10 @@ namespace EasyMapper;
 
 internal class Map<TOrigen, TDestino> : IMap<TOrigen, TDestino>
 {
-    private readonly IDictionary<string, Func<TOrigen, object>> _maps;
+    private readonly IDictionary<string, Func<TOrigen, object>> _maps = new Dictionary<string, Func<TOrigen, object>>();
 
     private Map()
     {
-        _maps = new Dictionary<string, Func<TOrigen, object>>();
         Parallel.ForEach(typeof(TOrigen).GetProperties(), p =>
         {
             var oP = typeof(TDestino).GetProperty(p.Name);

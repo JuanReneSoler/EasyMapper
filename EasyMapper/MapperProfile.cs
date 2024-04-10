@@ -24,8 +24,6 @@ internal class MapperProfile : IMapperProfile
 
     TDestino IMapperProfile.MapObject<TOrigen, TDestino>(TOrigen origen)
     {
-        if (origen is null) throw new Exception($"{typeof(TOrigen)} no puede ser nulo.");
-
         var key = $"{typeof(TOrigen)}=>{typeof(TDestino)}";
 
         if (_maps.ContainsKey(key))

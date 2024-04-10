@@ -15,16 +15,29 @@ class Object1
 
 class Object2
 {
-    public string? Nombre { get; set; }
+    public string Nombre { get; set; }
     public int Edad { get; set; }
+
     public override string ToString() => $"Nombre: {Nombre}, Edad: {Edad}";
+
+    public Object2()
+    {
+        Nombre = string.Empty;
+    }
 }
 
 class Object3
 {
-    public string? Name { get; set; }
+    public string Name { get; set; }
     public int Age { get; set; }
+
     public override string ToString() => $"I'm {Name} and i'm {Age} years old.";
+
+    public Object3()
+    {
+        Name = string.Empty;
+        Age = 0;
+    }
 }
 
 class Object4
@@ -69,10 +82,15 @@ class Program
 
         config.SetMapperProfile(x =>
         {
+            //
             x.CreateMap<Object1, Object2>();
+            
+            //
             x.CreateMap<Object1, Object3>()
                 .FromMember(x => x.Name, x => x.Nombre)
                 .FromMember(x => x.Age, x => x.Edad);
+
+            //
             x.CreateMap<Object1, Object4>().FromMember(x => x.Edad, x => x.Edad.ToString());
         });
 
