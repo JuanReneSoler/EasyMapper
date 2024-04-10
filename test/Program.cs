@@ -82,15 +82,15 @@ class Program
 
         config.SetMapperProfile(x =>
         {
-            //
+            //objecto con propiedades identicas.
             x.CreateMap<Object1, Object2>();
             
-            //
+            //objecto con propiedades distintas.
             x.CreateMap<Object1, Object3>()
                 .FromMember(x => x.Name, x => x.Nombre)
                 .FromMember(x => x.Age, x => x.Edad);
 
-            //
+            //objeto con propiedades identicas y diferentes.
             x.CreateMap<Object1, Object4>().FromMember(x => x.Edad, x => x.Edad.ToString());
         });
 
