@@ -8,22 +8,24 @@ internal class Map<TOrigen, TDestino> : IMap<TOrigen, TDestino>
 
     private Map()
     {
-        Parallel.ForEach(typeof(TOrigen).GetProperties(), p =>
+        foreach (var p in typeof(TOrigen).GetProperties())
         {
             var oP = typeof(TDestino).GetProperty(p.Name);
 
-            if (p.PropertyType == oP?.PropertyType)
+            if (
+                p.PropertyType == oP?.PropertyType
+                && !_maps.ContainsKey(p.Name))
             {
                 _maps.Add(p.Name, (obj) =>
                 {
                     var result = p.GetValue(obj);
 
-                    if(result is null) throw new Exception($"No se pudo obtener el valor de la propiedad: {p.Name}.");
+                    if (result is null) throw new Exception($"No se pudo obtener el valor de la propiedad: {p.Name}.");
 
                     return result;
                 });
             }
-        });
+        }
     }
 
     public static IMap<TOrigen, TDestino> CreateMap()
